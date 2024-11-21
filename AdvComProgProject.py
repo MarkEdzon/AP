@@ -9,3 +9,7 @@ class Reservation:
         self.room_number = room_number
         self.room_category = room_category
         self.total_cost = total_cost
+
+
+def add_reservation(reservations, available_rooms, room_categories):
+    if not available_rooms:
