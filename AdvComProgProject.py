@@ -10,7 +10,6 @@ class Reservation:
         self.room_category = room_category
         self.total_cost = total_cost
 
-
 def add_reservation(reservations, available_rooms, room_categories):
     if not available_rooms:
         print("Sorry, no rooms are available.")
@@ -53,7 +52,6 @@ def search_reservation(reservations):
             return
     print("Reservation not found.")
 
-
 def update_reservation(reservations):
     name = input("Enter the name for the reservation to update: ")
     for reservation in reservations:
@@ -68,7 +66,6 @@ def update_reservation(reservations):
             return
     print("Reservation not found.")
 
-
 def delete_reservation(reservations, available_rooms, room_categories):
     name = input("Enter the name for the reservation to delete: ")
     for reservation in reservations:
@@ -80,7 +77,6 @@ def delete_reservation(reservations, available_rooms, room_categories):
             return
     print("Reservation not found.")
 
-
 def display_reservations(reservations):
     if not reservations:
         print("No reservations available.")
@@ -88,7 +84,6 @@ def display_reservations(reservations):
     print("All reservations:")
     for reservation in reservations:
         print_reservation_details(reservation)
-
 
 def display_available_rooms(available_rooms, room_categories):
     if not available_rooms:
@@ -105,12 +100,10 @@ def check_out_reservations(reservations, available_rooms, room_categories):
     reservations[:] = [
         reservation for reservation in reservations
         if not is_date_before(reservation.check_out_date, current_date)
-    ]
-
+  ]
 
 def is_date_before(date1, date2):
     return date1 <= date2
-
 
 def print_reservation_details(reservation):
     print("========================================================================================================================================================================")
