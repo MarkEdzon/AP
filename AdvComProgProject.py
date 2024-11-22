@@ -52,7 +52,8 @@ def search_reservation(reservations):
             print_reservation_details(reservation)
             return
     print("Reservation not found.")
-    
+
+
 def update_reservation(reservations):
     name = input("Enter the name for the reservation to update: ")
     for reservation in reservations:
@@ -66,6 +67,7 @@ def update_reservation(reservations):
             print(f"Reservation updated successfully! New total cost: {reservation.total_cost} pesos.")
             return
     print("Reservation not found.")
+
 
 def delete_reservation(reservations, available_rooms, room_categories):
     name = input("Enter the name for the reservation to delete: ")
@@ -86,3 +88,83 @@ def display_reservations(reservations):
     print("All reservations:")
     for reservation in reservations:
         print_reservation_details(reservation)
+
+
+def display_available_rooms(available_rooms, room_categories):
+    if not available_rooms:
+        print("No available rooms.")
+        return
+    print("Available rooms:")
+    for i, room in enumerate(available_rooms):
+        category = room_categories[i] if i < len(room_categories) else "Unknown Category"
+        print(f"\tRoom {room} ({category})")
+
+
+def check_out_reservations(reservations, available_rooms, room_categories):
+    current_date = datetime.date.today().strftime("%Y-%m-%d")
+    reservations[:] = [
+        reservation for reservation in reservations
+        if not is_date_before(reservation.check_out_date, current_date)
+    ]
+
+
+def is_date_before(date1, date2):
+    return date1 <= date2
+
+
+def print_reservation_details(reservation):
+    print("========================================================================================================================================================================")
+    print(f"Name: {reservation.name}")
+    print(f"Check-in Date: {reservation.check_in_date}")
+    print(f"Check-out Date: {reservation.check_out_date}")
+    print(f"Number of Guests: {reservation.guests}")
+    print(f"Room Number: {reservation.room_number}")
+    print(f"Room Category: {reservation.room_category}")
+    print(f"Total Cost: {reservation.total_cost} pesos")
+    print("========================================================================================================================================================================")
+
+def main():
+    reservations = []
+    print("========================================================================================================================================================================")
+    available_rooms = [101, 102, 103, 104, 105]
+    room_categories = ["single", "double", "single", "double", "single"]
+
+    print("\t\t\t\t\t\t*******Welcome to the MEGA hotel reservation system!*******")
+    print("========================================================================================================================================================================")
+    print("The cost per day of stay is 1200 pesos")
+
+while True:
+        check_out_reservations(reservations, available_rooms, room_categories)
+        print("\nMenu:")
+        print("\t\t1. Add Reservation")
+        print("\t\t2. Search Reservation")
+        print("\t\t3. Update Reservation")
+        print("\t\t4. Delete Reservation")
+        print("\t\t5. Display All Reservations")
+        print("\t\t6. Display Available Rooms")
+        print("\t\t7. Exit")
+        print("========================================================================================================================================================================")
+        choice = int(input("\t\tChoose an option (1-7): "))
+        print("========================================================================================================================================================================")
+
+        if choice == 1:
+            add_reservation(reservations, available_rooms, room_categories)
+        elif choice == 2:
+            search_reservation(reservations)
+        elif choice == 3:
+            update_reservation(reservations)
+        elif choice == 4:
+            delete_reservation(reservations, available_rooms, room_categories)
+        elif choice == 5:
+            display_reservations(reservations)
+        elif choice == 6:
+            display_available_rooms(available_rooms, room_categories)
+        elif choice == 7:
+            print("\t\tThank you for considering us. Have a great day!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
