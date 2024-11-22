@@ -66,3 +66,23 @@ def update_reservation(reservations):
             print(f"Reservation updated successfully! New total cost: {reservation.total_cost} pesos.")
             return
     print("Reservation not found.")
+
+def delete_reservation(reservations, available_rooms, room_categories):
+    name = input("Enter the name for the reservation to delete: ")
+    for reservation in reservations:
+        if reservation.name == name:
+            available_rooms.append(reservation.room_number)
+            room_categories.append(reservation.room_category)
+            reservations.remove(reservation)
+            print("Reservation deleted successfully!")
+            return
+    print("Reservation not found.")
+
+
+def display_reservations(reservations):
+    if not reservations:
+        print("No reservations available.")
+        return
+    print("All reservations:")
+    for reservation in reservations:
+        print_reservation_details(reservation)
