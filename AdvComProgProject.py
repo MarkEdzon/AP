@@ -15,6 +15,7 @@ def add_reservation(reservations, available_rooms, room_categories):
     if not available_rooms:
         print("Sorry, no rooms are available.")
         return
+        
     print("========================================================================================================================================================================")
     name = input("\t\t[1] Please enter your name: ")
     check_in_date = input("\t\t[2] Enter check-in date (YYYY-MM-DD): ")
@@ -51,4 +52,17 @@ def search_reservation(reservations):
             print_reservation_details(reservation)
             return
     print("Reservation not found.")
-
+    
+def update_reservation(reservations):
+    name = input("Enter the name for the reservation to update: ")
+    for reservation in reservations:
+        if reservation.name == name:
+            reservation.check_in_date = input("Enter new check-in date (YYYY-MM-DD): ")
+            reservation.check_out_date = input("Enter new check-out date (YYYY-MM-DD): ")
+            reservation.guests = int(input("Enter new number of guests: "))
+            days = int(input("Enter new number of days of stay: "))
+            room_cost = 1200 if reservation.room_category == "single" else 2400
+            reservation.total_cost = room_cost * days
+            print(f"Reservation updated successfully! New total cost: {reservation.total_cost} pesos.")
+            return
+    print("Reservation not found.")
