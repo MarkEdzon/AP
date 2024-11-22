@@ -34,3 +34,21 @@ def add_reservation(reservations, available_rooms, room_categories):
    else:
         print("Invalid room number. Reservation not added.")
         return
+    days = int(input("\t\t[6] Enter the number of days you will stay: "))
+    room_cost = 1200 if room_category == "single" else 2400
+    total_cost = room_cost * days
+
+    reservation = Reservation(name, check_in_date, check_out_date, guests, room_number, room_category, total_cost)
+    reservations.append(reservation)
+    print(f"Reservation added successfully! Total cost: {total_cost} pesos.")
+
+
+def search_reservation(reservations):
+    name = input("Enter the name for the reservation to search: ")
+    for reservation in reservations:
+        if reservation.name == name:
+            print("Reservation found:")
+            print_reservation_details(reservation)
+            return
+    print("Reservation not found.")
+
